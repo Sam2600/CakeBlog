@@ -13,7 +13,7 @@ class Topic extends AppModel {
  *
  * @var mixed False or table name
  */
-	public $useTable = 'topic';
+	public $useTable = 'topics';
 
 /**
  * Display field
