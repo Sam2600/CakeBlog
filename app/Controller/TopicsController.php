@@ -13,6 +13,8 @@ class TopicsController extends AppController
           }
 
           $topic = $this->Topic->findById($id);
+          // var_dump($topic);
+          // die();
 
           if (!$topic) {
                return $this->redirect($this->referer());
