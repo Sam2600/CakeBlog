@@ -4,6 +4,33 @@ class TopicsController extends AppController
 {
      public function index()
      {
+          # Normal Find methods
+          //debug($this->Topic->find('all'));
+          //debug($this->Topic->find('list'));
+          //debug($this->Topic->find('first'));
+          //debug($this->Topic->find('count'));
+
+          # Normal Query
+          //debug($this->Topic->query('SELECT * FROM topics'));
+
+          # Normal Join Queries
+          //debug($this->Topic->query('SELECT * FROM topics LEFT JOIN posts ON topics.id = posts.topic_id WHERE topics.id > 6'));
+          //debug($this->Topic->query("SELECT * FROM topics LEFT JOIN posts ON topics.id = posts.topic_id WHERE topics.title LIKE CONCAT('%', 'p', '%') "));
+          //debug($this->Topic->query("SELECT * FROM topics WHERE topics.title LIKE CONCAT('p', '%') AND topics.id > 5"));
+
+          # ORM ***In OR NotIn*** Condition
+          //$inCondition = array('Topic.title' => array('Politic', 'Weather'));
+          //$notInCondition = array("NOT" => array('Topic.title' => array('Politic', 'Weather')));
+
+          # ORM ***In OR NotIn + AND *** Condition
+          //$inCondition = array('Topic.title' => array('Politic', 'Weather'), 'Topic.id >' => 5);
+          //$notInCondition = array("NOT" => array('Topic.title' => array('Politic', 'Weather')), 'Topic.id >' => 5);
+
+          # ORM ***OR*** Condition
+          //$orCondition = array("OR" => array('Topic.title' => array('Politic', 'Weather'), 'Topic.id >' => 10));
+          
+          //debug($this->Topic->query("SELECT title, visible FROM topics WHERE topics.id > 6 GROUP BY topics.title"));
+
           $this->set('topics', $this->Topic->find('all'));
      }
 
@@ -25,21 +52,27 @@ class TopicsController extends AppController
 
      public function add()
      {
-          if ($this->request->is('POST')) {
+          // if ($this->request->is('POST')) {
 
-               $formData = $this->request->data;
+          //      $formData = $this->request->data;
 
-               $this->Topic->create();
+          //      $this->Topic->create();
 
-               if ($this->Topic->save($formData)) {
+          //      if ($this->Topic->save($formData)) {
 
-                    $this->Flash->success(__('Topic created successfully'));
-                    return $this->redirect("index");
-               }
+          //           $this->Flash->success(__('Topic created successfully'));
+          //           return $this->redirect("index");
+          //      }
 
-               $this->Flash->error(__('Topic create failed'));
-               return $this->redirect($this->referer());
-          }
+          //      $this->Flash->error(__('Topic create failed'));
+          //      return $this->redirect($this->referer());
+          // }
+     }
+
+     public function formAdd()
+     {
+          pr("Ok");
+          die;
      }
 
      public function update($id)
@@ -88,6 +121,4 @@ class TopicsController extends AppController
 
           return $this->redirect('index');
      }
-
-     
 }
